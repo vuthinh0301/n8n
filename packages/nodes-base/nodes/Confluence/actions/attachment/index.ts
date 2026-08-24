@@ -1,8 +1,9 @@
 import type { INodeProperties } from 'n8n-workflow';
 
 import * as getMany from './getMany.operation';
+import * as upload from './upload.operation';
 
-export { getMany };
+export { getMany, upload };
 
 export const description: INodeProperties[] = [
 	{
@@ -22,8 +23,15 @@ export const description: INodeProperties[] = [
 				description: 'List the attachments on a page, optionally downloading each file',
 				action: 'Get many attachments',
 			},
+			{
+				name: 'Upload',
+				value: 'upload',
+				description: 'Upload a file as an attachment on a page',
+				action: 'Upload an attachment',
+			},
 		],
 		default: 'getMany',
 	},
 	...getMany.description,
+	...upload.description,
 ];

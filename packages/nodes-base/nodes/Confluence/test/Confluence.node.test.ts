@@ -25,7 +25,9 @@ describe('Confluence Node', () => {
 			operations.find((p) => (p.displayOptions?.show?.resource ?? []).includes(resourceName));
 		expect(operationsFor('attachment')?.options).toEqual([
 			expect.objectContaining({ value: 'getMany' }),
+			expect.objectContaining({ value: 'upload' }),
 		]);
+		expect(operationsFor('attachment')?.default).toBe('getMany');
 		expect(operationsFor('page')?.options).toEqual([
 			expect.objectContaining({ value: 'append' }),
 			expect.objectContaining({ value: 'create' }),
