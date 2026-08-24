@@ -2,6 +2,7 @@ import type { IDataObject, IExecuteFunctions, INodeExecutionData } from 'n8n-wor
 import { NodeOperationError } from 'n8n-workflow';
 
 import * as page from './page';
+import * as space from './space';
 
 /**
  * Compile-checked contract for operation modules. The router calls
@@ -38,6 +39,12 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 					break;
 				case 'page:update':
 					responseData = await page.update.execute.call(this, i);
+					break;
+				case 'space:get':
+					responseData = await space.get.execute.call(this, i);
+					break;
+				case 'space:getAll':
+					responseData = await space.getAll.execute.call(this, i);
 					break;
 				default:
 					throw new NodeOperationError(

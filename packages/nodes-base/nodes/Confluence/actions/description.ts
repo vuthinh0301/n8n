@@ -3,6 +3,7 @@ import type { INodeTypeDescription } from 'n8n-workflow';
 import { NodeConnectionTypes } from 'n8n-workflow';
 
 import * as page from './page';
+import * as space from './space';
 import { CONFLUENCE_CREDENTIAL_NAME } from '../transport';
 
 export const confluenceNodeDescription: INodeTypeDescription = {
@@ -37,9 +38,14 @@ export const confluenceNodeDescription: INodeTypeDescription = {
 					name: 'Page',
 					value: 'page',
 				},
+				{
+					name: 'Space',
+					value: 'space',
+				},
 			],
 			default: 'page',
 		},
 		...page.description,
+		...space.description,
 	],
 };

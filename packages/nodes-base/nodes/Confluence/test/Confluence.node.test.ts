@@ -13,17 +13,34 @@ describe('Confluence Node', () => {
 		expect(node.description.usableAsTool).toBeUndefined();
 	});
 
-	it('should expose the page resource with the append, create, delete, get and update operations', () => {
+	it('should expose the page and space resources', () => {
 		const resource = node.description.properties.find((p) => p.name === 'resource');
-		expect(resource?.options).toEqual([expect.objectContaining({ value: 'page' })]);
+		expect(resource?.options).toEqual([
+			expect.objectContaining({ value: 'page' }),
+			expect.objectContaining({ value: 'space' }),
+		]);
+	});
 
-		const operation = node.description.properties.find((p) => p.name === 'operation');
+	it('should expose the page resource with the append, create, delete, get and update operations', () => {
+		const operation = node.description.properties.find(
+			(p) => p.name === 'operation' && p.displayOptions?.show?.resource?.includes('page'),
+		);
 		expect(operation?.options).toEqual([
 			expect.objectContaining({ value: 'append' }),
 			expect.objectContaining({ value: 'create' }),
 			expect.objectContaining({ value: 'delete' }),
 			expect.objectContaining({ value: 'get' }),
 			expect.objectContaining({ value: 'update' }),
+		]);
+	});
+
+	it('should expose the space resource with the get and get many operations', () => {
+		const operation = node.description.properties.find(
+			(p) => p.name === 'operation' && p.displayOptions?.show?.resource?.includes('space'),
+		);
+		expect(operation?.options).toEqual([
+			expect.objectContaining({ value: 'get' }),
+			expect.objectContaining({ value: 'getAll' }),
 		]);
 	});
 
